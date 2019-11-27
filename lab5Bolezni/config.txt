@@ -1,0 +1,13 @@
+humans = 10
+doctors = 3
+illnessNumber = 2
+name = "Prostuda"
+healChange = 0.95
+speedChange = 0.5
+infectP = 0.3
+cureP = 0.7
+name = "Gripp"
+healChange = 0.8
+speedChange = 0.3
+infectP = 0.5
+cureP = 0.6
