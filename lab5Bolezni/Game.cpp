@@ -4,18 +4,12 @@ Game::Game()
 {
 	initialised = false;
 	isGame = false;
-	m_illnesses = nullptr;
 }
 
 Game::Game(const char* configName)
 {
 	isGame = false;
 	init(configName);
-}
-
-Game::~Game()
-{
-	delete[] m_illnesses;
 }
 
 void Game::startGame()
@@ -28,8 +22,7 @@ void Game::startGame()
 
 void Game::init(const char* configName)
 {
-	m_field = Field(1, 1, FIELD_WIDTH, FIELD_HEIGHT);
-	m_viewport = Viewport(Position(0, 0), VIEWPORT_STD_WIDTH, VIEWPORT_STD_HEIGHT);
+	m_field = Field(10, FIELD_WIDTH, FIELD_HEIGHT);
 
 	initialised = true;
 }
@@ -39,11 +32,12 @@ void Game::endGame()
 	isGame = false;
 }
 
-void Game::draw()
+void Game::update(double deltaT)
 {
+	m_field.update(deltaT);
 }
 
-void Game::update()
+const Field& Game::getField()
 {
-	m_field.update();
+	return m_field;
 }

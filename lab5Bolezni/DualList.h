@@ -14,7 +14,8 @@ public:
 	DListElement(const T& data = T(), DListElement* prev = nullptr, DListElement* next = nullptr);
 	DListElement* getPrev() const;
 	DListElement* getNext() const;
-	T getData() const;
+	const T& getData() const;
+	T& getData();
 	void setData(const T& data);
 	void setNext(DListElement* next);
 	void setPrev(DListElement* prev);
@@ -41,7 +42,13 @@ DListElement<T>* DListElement<T>::getNext() const
 }
 
 template <typename T>
-T DListElement<T>::getData() const
+const T& DListElement<T>::getData() const
+{
+	return m_data;
+}
+
+template <typename T>
+T& DListElement<T>::getData()
 {
 	return m_data;
 }
@@ -75,15 +82,18 @@ private:
 
 public:
 	DList();
+	DList(DList&& other);
 
 	void addHead(const T& data);
 	void addTail(const T& data);
 	void change(const T& data, size_t index);
-	void del(size_t number);
+	T del(size_t number);
 	int search(const T& data) const;
 	size_t amountElements() const;
 
-	T operator [](size_t index) const;
+	const T& operator [](size_t index) const;
+	T& operator [](size_t index);
+	DList<T>& operator = (const DList<T>& other);
 
 	~DList();
 };
@@ -92,6 +102,15 @@ template<typename T>
 inline DList<T>::DList()
 {
 	m_head = m_tail = nullptr;
+}
+
+template<typename T>
+inline DList<T>::DList(DList&& other)
+{
+	m_head = other.m_head;
+	m_tail = other.m_tail;
+	other.m_head = nullptr;
+	other.m_tail = nullptr;
 }
 
 template<typename T>
@@ -132,7 +151,7 @@ inline void DList<T>::change(const T& data, size_t index)
 }
 
 template<typename T>
-inline void DList<T>::del(size_t number)
+inline T DList<T>::del(size_t number)
 {
 	DListElement<T>* p = m_head;
 	for (size_t i = 0; i < number; i++)
@@ -145,7 +164,9 @@ inline void DList<T>::del(size_t number)
 		m_head = m_head->getNext();
 	if (p == m_tail)
 		m_tail = m_tail->getPrev();
+	T data = p->getData();
 	delete p;
+	return data;
 }
 
 template<typename T>
@@ -177,14 +198,51 @@ inline size_t DList<T>::amountElements() const
 }
 
 template<typename T>
-inline T DList<T>::operator[](size_t index) const
+inline const T& DList<T>::operator[](size_t index) const
 {
 	if (index >= amountElements())
-        throw "Выход за пределы списка";//std::invalid_argument("Выход за пределы списка");
+		throw "Выход за пределы списка";//std::invalid_argument("Выход за пределы списка");
 	DListElement<T>* p = m_head;
 	for (size_t i = 0; i < index; i++)
 		p = p->getNext();
 	return p->getData();
+}
+
+template<typename T>
+inline T& DList<T>::operator[](size_t index)
+{
+	if (index >= amountElements())
+		throw "Выход за пределы списка";//std::invalid_argument("Выход за пределы списка");
+	DListElement<T>* p = m_head;
+	for (size_t i = 0; i < index; i++)
+		p = p->getNext();
+	return p->getData();
+}
+
+template<typename T>
+inline DList<T>& DList<T>::operator=(const DList<T>& other)
+{
+	if (other.m_head == nullptr)
+	{
+		m_head = nullptr;
+		m_tail = nullptr;
+		return *this;
+	}
+
+	m_head = new DListElement<T>(other.m_head->getData(), nullptr);
+
+	DListElement<T>* p1 = other.m_head;
+	DListElement<T>* p2 = m_head;
+
+	while (p1->getNext() != nullptr)
+	{
+		p1 = p1->getNext();
+		p2->setNext(new DListElement<T>(p1->getData(), p2));
+	}
+
+	m_tail = p2;
+
+	return *this;
 }
 
 template<typename T>

@@ -124,16 +124,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="InputController.cpp" />
     <ClCompile Include="Doctor.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Human.cpp" />
     <ClCompile Include="Illness.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MovingObject.cpp" />
     <ClCompile Include="Viewport.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="Controller.h" />
+    <ClInclude Include="InputController.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="Doctor.h" />
     <ClInclude Include="DualList.h" />
@@ -141,6 +146,8 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Human.h" />
     <ClInclude Include="Illness.h" />
+    <ClInclude Include="MovingObject.h" />
+    <ClInclude Include="Notes.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="Viewport.h" />
   </ItemGroup>

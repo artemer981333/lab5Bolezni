@@ -4,25 +4,29 @@
 #include "Field.h"
 #include "Human.h"
 #include "Doctor.h"
-#include "glut.h"
+#include "MovingObject.h"
+
+class Controller;
 
 class Viewport
+	: public MovingObject
 {
 public:
-	Viewport(Position pos = Position(0, 0), double width = 0, double height = 0);
+	Viewport(Controller* controller = nullptr, Position pos = Position(0, 0), double width = 0, double height = 0);
 
-	Position getPosition() const;
+	double getWidth() const;
+	double getHeight() const;
 
-	void setPosition(const Position& pos);
+	virtual void move(double deltaT);
 
 	void drawField(const Field& field) const;
 
 private:
 	void drawHuman(const Human& human) const;
-	void drawDoctor(const Doctor& human) const;
 
-	Position m_pos;
-	double	m_width;
-	double 	m_height;
+	double m_width;
+	double m_height;
+	double m_pixToMeter;
+	Controller* m_controlller;
 };
 

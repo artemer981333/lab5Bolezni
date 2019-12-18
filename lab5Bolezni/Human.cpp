@@ -1,25 +1,11 @@
 #include "Human.h"
+#include <iostream>
 
-Human::Human(Position pos, double speed, double health)
+Human::Human(Position pos, double speed, double health, Illness ill)
+	: MovingObject(pos, Direction(), speed)
 {
-	m_pos = pos;
-	m_speed = speed;
 	m_health = health;
-}
-
-Position Human::getPosition() const
-{
-	return m_pos;
-}
-
-Direction Human::getDirection() const
-{
-	return Direction();
-}
-
-double Human::getSpeed() const
-{
-	return m_speed;
+	infect(ill);
 }
 
 double Human::getHealth() const
@@ -37,34 +23,42 @@ size_t Human::getNumberOfIllness() const
 	return m_illnessesList.amountElements();
 }
 
-bool Human::isIll(Illness ill) const
+bool Human::isIll(const Illness& ill) const
 {
-	return m_illnessesList.search(ill) >= 0;
+	return m_illnessesList.search(ill) > 0;
 }
 
-void Human::update()
+bool Human::isIll() const
 {
-	m_pos += m_dir.move(m_speed);
+	return m_illnessesList.amountElements() > 0;
+}
+
+void Human::update(double deltaT)
+{
+	move(deltaT);
 
 	size_t numberIlls = m_illnessesList.amountElements();
 	for (size_t i = 0; i < numberIlls; i++)
-		m_illnessesList[i].effect(*this);
+		m_illnessesList[i].affect(*this, deltaT);
 }
 
 void Human::infect(Illness ill)
 {
 	if (!isIll(ill))
+	{
+		ill.infectEffect(*this);
 		m_illnessesList.addTail(ill);
+	}
 }
 
 void Human::cureIll(size_t index)
 {
-	m_illnessesList.del(index);
+	m_illnessesList.del(index).cureEffect(*this);
 }
 
-void Human::move(Position pos)
+void Human::move(double deltaT)
 {
-	m_pos = pos;
+	m_pos += m_dir.move(m_speed * deltaT);
 }
 
 void Human::setDirection(Direction dir)
@@ -72,26 +66,30 @@ void Human::setDirection(Direction dir)
 	m_dir = dir;
 }
 
-void Human::slow(double speedDown)
+void Human::changeSpeed(double speedKoef)
 {
-	if (speedDown >= 1)
+	if (speedKoef >= 0)
 	{
-		m_speed /= speedDown;
+		m_speed *= speedKoef;
 		m_speed = (m_speed > HUMAN_MAX_SPEED) ? HUMAN_MAX_SPEED : m_speed;
 	}
 }
 
-void Human::hast(double speedUp)
-{
-	if (speedUp <= 1 && speedUp > 0)
-	{
-		m_speed *= speedUp;
-		m_speed = (m_speed > HUMAN_MAX_SPEED) ? HUMAN_MAX_SPEED : m_speed;
-	}
-}
-
-void Human::heal(double health)
+void Human::changeHealth(double health)
 {
 	m_health += health;
 	m_health = (m_health > HUMAN_MAX_HP) ? HUMAN_MAX_HP : m_health;
+	m_health = (m_health < 0) ? 0 : m_health;
+}
+
+const Human& Human::operator=(const Human& other)
+{
+	if (&other == this)
+		return *this;
+	m_pos = other.m_pos;
+	m_dir = other.m_dir;
+	m_speed = other.m_speed;
+	m_health = other.m_health;
+	m_illnessesList = other.m_illnessesList;
+	return *this;
 }

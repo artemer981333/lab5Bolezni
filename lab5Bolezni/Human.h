@@ -5,35 +5,34 @@
 #include "Direction.h"
 #include "DualList.h"
 #include "Illness.h"
+#include "MovingObject.h"
+#include <time.h>
 
 class Human
+	: public MovingObject
 {
 public:
-	Human(Position pos = Position(0, 0), double speed = HUMAN_STD_SPEED, double health = HUMAN_MAX_HP);
+	Human(Position pos = Position(), double speed = HUMAN_STD_SPEED, double health = HUMAN_MAX_HP, Illness ill = Illness::generate());
 
-	Position getPosition() const;
-	Direction getDirection() const;
-	double getSpeed() const;
 	double getHealth() const;
 	Illness getIllness(size_t index) const;
 	size_t getNumberOfIllness() const;
-	bool isIll(Illness ill) const;
+	bool isIll(const Illness& ill) const;
+	bool isIll() const;
 
-	void update();
+	virtual void update(double deltaT);
 
 	void infect(Illness ill);
 	void cureIll(size_t index);
 
-	void move(Position pos);
+	void move(double DeltaT);
 	void setDirection(Direction dir);
-	void slow(double speedUp);
-	void hast(double speedDown);
-	void heal(double health);
+	void changeSpeed(double speedKoef);
+	void changeHealth(double health);
+
+	const Human& operator = (const Human& other);
 
 protected:
-	Position m_pos;
-	Direction m_dir;
-	double m_speed;
 	double m_health;
 	DList<Illness> m_illnessesList;
 };

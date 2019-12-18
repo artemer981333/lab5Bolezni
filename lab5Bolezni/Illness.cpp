@@ -1,32 +1,42 @@
 #include "Illness.h"
 #include "Human.h"
+#include <random>
 
-Illness::Illness(string name, double healChange, double speedChange, double infectP, double cureP, Illness* efectIll, clock_t efectIllTime)
+Illness Illness::generate()
 {
-	m_name = name;
+	static std::default_random_engine generator;
+	std::uniform_int_distribution<int> distribution(0, RAND_MAX);
+
+	Illness ill;
+	ill.m_cureP = distribution(generator) / (double)RAND_MAX;
+	ill.m_healChange = distribution(generator) / (double)RAND_MAX * 10;
+	ill.m_infectP = distribution(generator) / (double)RAND_MAX;
+	ill.m_speedChange = distribution(generator) / (double)RAND_MAX;
+
+	return ill;
+}
+
+Illness::Illness(double healChange, double speedChange, double infectP, double cureP)
+{
 	m_healChange = healChange;
 	m_speedChange = speedChange;
 	m_infectP = infectP;
 	m_cureP = cureP;
-	m_efectIll = efectIll;
-	m_efectIllTime = efectIllTime;
 }
 
-void Illness::effect(Human& human) const
+void Illness::affect(Human& human, double deltaT)
 {
-	human.heal(m_healChange * (clock() - m_lastEffectTime));
-	if (m_efectIll != nullptr && clock() - m_infectTime >= m_efectIllTime)
-		human.infect(*m_efectIll);
+	human.changeHealth(-m_healChange * deltaT);
 }
 
 void Illness::infectEffect(Human& human) const
 {
-	human.slow(m_speedChange);
+	human.changeSpeed(m_speedChange);
 }
 
 void Illness::cureEffect(Human& human) const
 {
-	human.hast(m_speedChange);
+	human.changeSpeed(1 / m_speedChange);
 }
 
 double Illness::getInfectP() const
@@ -44,8 +54,6 @@ bool Illness::operator==(Illness other)
 	return 
 		m_healChange == other.m_healChange && 
 		m_speedChange == other.m_speedChange && 
-		m_efectIll == other.m_efectIll && 
-		m_efectIllTime == other.m_efectIllTime && 
 		m_infectP == other.m_infectP && 
 		m_cureP == other.m_cureP;
 }
