@@ -7,7 +7,7 @@
 #define DOCTOR_LEVELUP_XP 20		//стандартное количество опыта для левелапа
 #define DOCTOR_R_COEF 1.5			//во сколько раз увеличивается радиус за уровень
 #define DOCTOR_P_COEF 1.2			//во сколько раз увеличивается вероятность излечения болезни за уровень
-#define DOCTOR_CURE_P 0.1				//вероятность излечения болезни
+#define DOCTOR_CURE_P 0.1			//вероятность излечения болезни
 #define DOCTOR_XP_FOR_CURE 5		//опыт за излечение болезни
 #define DOCTOR_XP_FOR_HEAL 1		//опыт за лечение
 #define DOCTOR_CURE_LEVEL 1			//с какого уровня можно лечить болезни
@@ -24,7 +24,7 @@
 #define HUMAN_MAX_SPEED 2			//максимальная скорость человека(м/c)
 #define HUMAN_STD_SPEED 1			//базовая скорость человека(м/c)
 #define HUMAN_COLOR 0,1,0			//цвет здорового человека
-#define HUMAN_ILLNESS_COLOR 1,0,0	//цвет больного человека
+//#define HUMAN_ILLNESS_COLOR 1,0,0	//цвет больного человека
 
 #define FIELD_WIDTH 100				//ширина поля(м)
 #define FIELD_HEIGHT 100			//высота поля(м)

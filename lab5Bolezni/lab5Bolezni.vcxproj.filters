@@ -1,93 +1,123 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Исходные файлы">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Файлы заголовков">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Файлы ресурсов">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Controller">
+      <UniqueIdentifier>{10afc032-7891-418f-8b98-4c5558b06335}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{5969212f-5872-4796-a565-5ccdec9a393c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilits">
+      <UniqueIdentifier>{53204b0b-5816-4254-995b-cecc4fb10304}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Field">
+      <UniqueIdentifier>{fb629814-ce11-4249-bd03-508eab8de515}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\MovingObject">
+      <UniqueIdentifier>{dff300d1-f685-418a-9c02-338c70918de1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Human">
+      <UniqueIdentifier>{c53a303d-6087-48c1-9210-4353cb2ca94a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Illness">
+      <UniqueIdentifier>{3722286c-1765-4304-b2c6-2eb2965123a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Human\Doctor">
+      <UniqueIdentifier>{0b907b25-91f4-4479-b119-2d6cf62bd6ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controller\Viewport">
+      <UniqueIdentifier>{60a16341-e529-4069-ba4e-68b9c18a3ab1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controller\InputController">
+      <UniqueIdentifier>{b3f65f22-9b5c-4cf6-9cfd-28df4e2101c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Other">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Doctor.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Human.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Illness.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Viewport.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Field.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="InputController.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="Controller.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewport.cpp">
+      <Filter>Controller\Viewport</Filter>
+    </ClCompile>
+    <ClCompile Include="Field.cpp">
+      <Filter>Game\Field</Filter>
     </ClCompile>
     <ClCompile Include="MovingObject.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Game\MovingObject</Filter>
+    </ClCompile>
+    <ClCompile Include="InputController.cpp">
+      <Filter>Controller\InputController</Filter>
+    </ClCompile>
+    <ClCompile Include="Human.cpp">
+      <Filter>Game\Human</Filter>
+    </ClCompile>
+    <ClCompile Include="Doctor.cpp">
+      <Filter>Game\Human\Doctor</Filter>
+    </ClCompile>
+    <ClCompile Include="Illness.cpp">
+      <Filter>Game\Illness</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Doctor.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="DualList.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Human.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Illness.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Constants.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Viewport.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Position.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Field.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Direction.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="InputController.h">
-      <Filter>Файлы заголовков</Filter>
+    <ClInclude Include="Notes.h">
+      <Filter>Other</Filter>
     </ClInclude>
     <ClInclude Include="Controller.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Controller</Filter>
     </ClInclude>
-    <ClInclude Include="Notes.h">
-      <Filter>Файлы заголовков</Filter>
+    <ClInclude Include="Game.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewport.h">
+      <Filter>Controller\Viewport</Filter>
+    </ClInclude>
+    <ClInclude Include="Field.h">
+      <Filter>Game\Field</Filter>
     </ClInclude>
     <ClInclude Include="MovingObject.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Game\MovingObject</Filter>
+    </ClInclude>
+    <ClInclude Include="InputController.h">
+      <Filter>Controller\InputController</Filter>
+    </ClInclude>
+    <ClInclude Include="Human.h">
+      <Filter>Game\Human</Filter>
+    </ClInclude>
+    <ClInclude Include="Doctor.h">
+      <Filter>Game\Human\Doctor</Filter>
+    </ClInclude>
+    <ClInclude Include="Illness.h">
+      <Filter>Game\Illness</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>Utilits</Filter>
+    </ClInclude>
+    <ClInclude Include="Direction.h">
+      <Filter>Utilits</Filter>
+    </ClInclude>
+    <ClInclude Include="DualList.h">
+      <Filter>Utilits</Filter>
+    </ClInclude>
+    <ClInclude Include="Position.h">
+      <Filter>Utilits</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

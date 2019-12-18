@@ -1,6 +1,6 @@
 #include "Doctor.h"
 #include <math.h>
-#include <stdlib.h>
+#include <iostream>
 #include <time.h>
 
 Doctor::Doctor(Position pos, double speed, double health, double power, size_t level, size_t xp)
@@ -50,7 +50,7 @@ void Doctor::healHumans(DList<Human*> humans)
 	}
 }
 
-void Doctor::levelUP()
+void Doctor::checkLevelUP()
 {
 	if (m_xp >= DOCTOR_LEVELUP_XP * pow(DOCTOR_LEVELUP_COEF, m_level - 1))
 	{
@@ -58,6 +58,7 @@ void Doctor::levelUP()
 		m_cureDistance *= DOCTOR_R_COEF;
 		m_healDistance *= DOCTOR_R_COEF;
 		m_cureP *= DOCTOR_P_COEF;
+		std::cout << "Level up!" << std::endl;
 	}
 }
 
@@ -68,7 +69,7 @@ void Doctor::update(double deltaT)
 	m_power = (m_power > DOCTOR_STD_POWER) ? HUMAN_MAX_HP : m_power;
 	m_power = (m_power < 0) ? 0 : m_power;
 
-	levelUP();
+	checkLevelUP();
 }
 
 double Doctor::getCureDistance()
