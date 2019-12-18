@@ -97,12 +97,16 @@ void InputController::handleUpInput(char key)
 
 void InputController::handleInput(Position pos)
 {
-	DList<Human*> humans = m_controller->getField()->getHumansInArea(pos, HUMAN_SIZE_R);
+	DList<Human*> humans = m_controller->getField().getHumansInArea(pos, HUMAN_SIZE_R);
 	if (humans.amountElements() == 0)
 	{
-		if (m_controlledObject != nullptr)
+		Viewport* viewport = &m_controller->getViewport();
+		if (m_controlledObject != nullptr && m_controlledObject != viewport)
+		{
+			viewport->setDirection(m_controlledObject->getDirection());
 			m_controlledObject->setDirection(Direction(0, 0));
-		m_controlledObject = nullptr;
+		}
+		m_controlledObject = viewport;
 		return;
 	}
 
@@ -123,11 +127,11 @@ const MovingObject* InputController::getControledObject()
 void InputController::heal()
 {
 	if (typeid(*m_controlledObject) == typeid(Doctor))
-		((Doctor*)m_controlledObject)->healHumans(m_controller->getField()->getHumansInArea(m_controlledObject->getPosition(), DOCTOR_HEAL_R));
+		((Doctor*)m_controlledObject)->healHumans(m_controller->getField().getHumansInArea(m_controlledObject->getPosition(), DOCTOR_HEAL_R));
 }
 
 void InputController::cure()
 {
 	if (typeid(*m_controlledObject) == typeid(Doctor))
-		((Doctor*)m_controlledObject)->cureHumans(m_controller->getField()->getHumansInArea(m_controlledObject->getPosition(), DOCTOR_CURE_R));
+		((Doctor*)m_controlledObject)->cureHumans(m_controller->getField().getHumansInArea(m_controlledObject->getPosition(), DOCTOR_CURE_R));
 }

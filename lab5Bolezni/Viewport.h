@@ -12,7 +12,7 @@ class Viewport
 	: public MovingObject
 {
 public:
-	Viewport(Controller* controller = nullptr, Position pos = Position(0, 0), double width = 0, double height = 0);
+	Viewport(Controller* controller = nullptr, Position pos = Position(0, 0), double speed = 0, double width = 0, double height = 0);
 
 	double getWidth() const;
 	double getHeight() const;

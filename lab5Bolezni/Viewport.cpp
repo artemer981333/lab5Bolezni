@@ -6,7 +6,8 @@
 #include <typeinfo>
 #include <iostream>
 
-Viewport::Viewport(Controller* controller, Position pos, double width, double height)
+Viewport::Viewport(Controller* controller, Position pos, double speed, double width, double height)
+	: MovingObject(pos, Direction(), speed)
 {
 	m_pos = pos;
 	m_width = width;

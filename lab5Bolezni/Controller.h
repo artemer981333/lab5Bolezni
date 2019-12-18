@@ -20,7 +20,7 @@ public:
 
 	const Human* getControlledHuman();
 	const Field& getField();
-	const Viewport& getViewport();
+	Viewport& getViewport();
 
 private:
 	Game* m_game;

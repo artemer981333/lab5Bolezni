@@ -10,7 +10,7 @@ Controller::Controller(Game* game)
 	m_game = game;
 	m_lastUpdateTime = clock();
 
-	m_viewport = Viewport(this, Position(0, 0), VIEWPORT_STD_WIDTH, VIEWPORT_STD_HEIGHT);
+	m_viewport = Viewport(this, Position(0, 0), 10, VIEWPORT_STD_WIDTH, VIEWPORT_STD_HEIGHT);
 	m_inputController = InputController(this, &m_viewport);
 }
 
@@ -18,8 +18,10 @@ void Controller::update()
 {
 	clock_t dT = clock() - m_lastUpdateTime;
 	m_lastUpdateTime += dT;
+	double deltaT = dT / 1000.;
 
-	m_game->update(dT / 1000.);
+	m_viewport.move(deltaT);
+	m_game->update(deltaT);
 }
 
 void Controller::draw()
@@ -30,7 +32,6 @@ void Controller::draw()
 
 	glutSwapBuffers();
 	glFlush();
-
 }
 
 void Controller::inputKey(char key, bool pressed)
@@ -67,7 +68,7 @@ const Field& Controller::getField()
 	return m_game->getField();
 }
 
-const Viewport& Controller::getViewport()
+Viewport& Controller::getViewport()
 {
 	return m_viewport;
 }
